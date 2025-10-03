@@ -2,12 +2,13 @@
 layout: single
 title: "Extending kernel support with Virtme-ng"
 date: 2025-10-03
-tags: [jekyll, tutorial, programming, web development]
 ---
 
 ## Introduction
 
-In this blog post, I’ll walk you through a recent project I worked on, where I developed a [brief description of your project, e.g., "full-stack web application", "data analysis pipeline", "e-commerce site", etc.]. This post will give you a semi-technical overview of the steps I took, the tools I used, and the challenges I overcame.
+If you’re working in a virtualized environment or with Linux kernels and filesystems, you know how crucial it is to automate and validate tests to ensure things are working smoothly. That’s where **Virtme-ng** comes into play. 
+
+In this blog post, I’ll walk you through a recent project I worked on, where I developed a virtualized testing framework for **CernVM-FS (Cern Virtual Machine File System)**. This post will give you a semi-technical overview of the steps I took, the tools I used, and the challenges I overcame.
 
 ### Table of Contents
 - [Project Overview](#project-overview)
@@ -22,13 +23,13 @@ In this blog post, I’ll walk you through a recent project I worked on, where I
 
 ## Project Overview
 
-In the project, I aimed to [state the main objective of your project, e.g., "build a scalable API for e-commerce platforms" or "create a user-friendly dashboard for tracking analytics"]. The project evolved over [duration], and I had the opportunity to experiment with various technologies and techniques.
+In the project, I aimed to build a robust testing framework leveraging a powerful virtualization tool to extend the current test framework to multiple linux kernels. CernVM-FS relies on various kernel level syscalls and dependencies like libfuse, which undergo changes across the development of linux. This project was a successful attempt of developing a framework to catch issues in CernVM-FS due to the underlying kernel. The project evolved over 16 weeks, and I had the opportunity to experiment with various technologies and techniques.
 
 Here’s a brief breakdown of what was achieved:
 
-- **Phase 1**: [Brief description of phase 1, e.g., "Setting up the project structure and database schema."]
-- **Phase 2**: [Brief description of phase 2, e.g., "Implemented core features like user authentication and data visualization."]
-- **Phase 3**: [Brief description of phase 3, e.g., "Optimized performance and added integrations with third-party services."]
+- **Phase 1**: A git bisect friendly setup using virtme-ng to pinpoint a kernel introducing a regression
+- **Phase 2**: A virtualized test framework capable of running selected tests across a range of linux kernels
+- **Phase 3**: A setup for using user selected libfuse version to aid in the above framework
   
 ---
 
@@ -36,15 +37,13 @@ Here’s a brief breakdown of what was achieved:
 
 I relied on several tools and technologies throughout the development process:
 
-- **Frontend**: [e.g., React.js, Vue.js, HTML, CSS, etc.]
-- **Backend**: [e.g., Node.js, Django, Flask, etc.]
-- **Database**: [e.g., PostgreSQL, MongoDB, etc.]
-- **Version Control**: [e.g., Git, GitHub]
-- **Testing**: [e.g., Jest, Mocha, etc.]
-- **Deployment**: [e.g., Docker, Heroku, AWS, etc.]
-- **Other Tools**: [e.g., Postman for API testing, Webpack for bundling, etc.]
-
-Each of these technologies played a critical role in shaping the project, and I’ll dive into how I integrated them below.
+- [**Linux kernel**](https://www.kernel.org/)
+- [**Virtme-ng**](https://github.com/arighi/virtme-ng)
+- [**libFUSE**](https://github.com/libfuse/libfuse)
+- [**VirtioFS**](https://gitlab.com/virtio-fs/virtiofsd)
+- [**systemd**](https://systemd.io/)
+- [**CMake**](https://cmake.org/)
+- **bash**
 
 ---
 
@@ -52,21 +51,34 @@ Each of these technologies played a critical role in shaping the project, and I�
 
 Here are some key features of the project that I implemented:
 
-1. **Feature 1**: [Short description of the feature and its purpose, e.g., "User authentication system with JWT tokens for secure login."]
-2. **Feature 2**: [Short description of the feature, e.g., "Real-time notifications for users using WebSockets."]
-3. **Feature 3**: [Short description of the feature, e.g., "Graphical data visualizations for analytics."]
-  
+### Automated Kernel & Filesystem Testing
+
+The main goal of VNG Testing is to run automated tests that validate kernel functionality in a controlled environment. It ensures that changes to the kernel or filesystem don't break anything, and that the system remains stable and secure.
+
+### Virtualized Testing Environment
+
+Using **virtme-ng** at the heart of the framework, the tests run inside a lightweight virtual machine (VM), providing complete isolation from your primary system. The tests can be run with different configurations or kernel versions, ensuring compatibility and functionality across various setups.
+
+### Custom libfuse integration
+
+As part of the virtualized testing framework, I integrated the ability to use a custom version of libfuse for testing. This was critical because CernVM-FS relies heavily on the libfuse library for filesystem operations, and different versions can introduce subtle regressions or incompatibilities. By enabling developers to specify a custom libfuse version during test execution, I ensured that the framework could handle various version-specific edge cases. This added another layer of flexibility, allowing the tests to be more comprehensive and adaptable to evolving dependencies.
+
+### Test Extensibility
+
+Adding new tests or modifying existing ones is easy. VNG Testing is designed to be flexible, allowing you to create new test suites or update current ones with minimal effort.
+
 ---
 
 ## Challenges Faced
 
 No project is without its challenges. Some of the key obstacles I faced during development were:
 
-- **Challenge 1**: [Description of challenge, e.g., "Integrating third-party APIs with inconsistent documentation."]
-- **Challenge 2**: [Description of challenge, e.g., "Optimizing the performance of the frontend application for mobile users."]
-- **Challenge 3**: [Description of challenge, e.g., "Handling large-scale data processing in real-time."]
+- **Challenge 1**: Adjusting the virtual environment to run CernVM-FS client and server as they would on a normal host
+- **Challenge 2**: Managing mounts inside the virtual machine to be used by CernVM-FS
+- **Challenge 3**: Optimizing the virtual machine setup to run tests efficiently while maintaining sufficient isolation for accurate results
+- **Challenge 4**: Overcoming a limitation in virtme-ng to run systemd fstab generator which was crucial for running CernVM-FS server
 
-To overcome these, I researched various solutions, and eventually, I was able to implement a strategy that worked effectively.
+To overcome these, I researched various solutions like creating tmpfs mounts for quick IO, enabling systemd support in virtme-ng by using /dev/null etc. and eventually, I was able to implement a strategy that worked effectively.
 
 ---
 
@@ -74,15 +86,26 @@ To overcome these, I researched various solutions, and eventually, I was able to
 
 Throughout this project, I learned a lot, both from a technical and personal standpoint:
 
-- **Lesson 1**: [Brief explanation of what you learned, e.g., "The importance of writing clean and maintainable code."]
-- **Lesson 2**: [Brief explanation of another lesson, e.g., "The value of testing early and often."]
-- **Lesson 3**: [Brief explanation of another lesson, e.g., "Effective time management and breaking down complex tasks."]
+- **Lesson 1**: Flexibility is key in automated testing. Tools like virtme-ng can help scale testing across multiple environments, but ensuring flexibility in your framework (e.g., through custom libfuse) helps tackle version-specific issues
+- **Lesson 2**: Proper environment isolation is crucial when testing low-level system components like filesystems. Using a VM allows for greater stability in testing
+- **Lesson 3**: Well-tested software is reliable software. It’s important to prioritize test extensibility early in development. This makes adding future tests and troubleshooting much easier and builds a robust system
+- **Lesson 4**: I gained more depth in kernel modules, systemd and how various other libraries integrate with the kernel to give user the ability to perform operations
+- **Lesson 5**: Last but most importantly, Documentation is equally important as development as it provides a clear understanding of the software's functionality
 
 These lessons will undoubtedly help me in future projects and improve my approach to development.
 
 ---
 
 ## Pull Requests
+
+You can check out the details of the changes I made via the following pull requests:
+
+- [**PR 1**](https://github.com/cvmfs/cvmfs/pull/3986)
+- [**PR 2**](https://github.com/cvmfs/cvmfs/pull/3998)
+- [**PR 3**](https://github.com/cvmfs/cvmfs/pull/3996)
+- [**Bisect setup**](https://github.com/ShivamMadlani/CVMFS_kernel_test)
+
+This includes improvements to the test framework, integration of custom libfuse versions, and optimizations for kernel compatibility.
 
 ---
 
@@ -93,4 +116,3 @@ In conclusion, this project has been a rewarding experience. I was able to apply
 I hope this overview has given you a good sense of the project and the steps I took to complete it. Feel free to reach out if you have any questions or want to dive deeper into any aspect of the project!
 
 ---
-
