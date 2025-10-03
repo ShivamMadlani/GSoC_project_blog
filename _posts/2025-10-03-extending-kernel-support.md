@@ -37,12 +37,12 @@ Here’s a brief breakdown of what was achieved:
 
 I relied on several tools and technologies throughout the development process:
 
-- [**Linux kernel**](https://www.kernel.org/)
-- [**Virtme-ng**](https://github.com/arighi/virtme-ng)
-- [**libFUSE**](https://github.com/libfuse/libfuse)
-- [**VirtioFS**](https://gitlab.com/virtio-fs/virtiofsd)
-- [**systemd**](https://systemd.io/)
-- [**CMake**](https://cmake.org/)
+- [**Linux kernel**](https://www.kernel.org/){:target="_blank"}
+- [**Virtme-ng**](https://github.com/arighi/virtme-ng){:target="_blank"}
+- [**libFUSE**](https://github.com/libfuse/libfuse){:target="_blank"}
+- [**VirtioFS**](https://gitlab.com/virtio-fs/virtiofsd){:target="_blank"}
+- [**systemd**](https://systemd.io/){:target="_blank"}
+- [**CMake**](https://cmake.org/){:target="_blank"}
 - **bash**
 
 ---
@@ -100,10 +100,10 @@ These lessons will undoubtedly help me in future projects and improve my approac
 
 You can check out the details of the changes I made via the following pull requests:
 
-- [**PR 1**](https://github.com/cvmfs/cvmfs/pull/3986)
-- [**PR 2**](https://github.com/cvmfs/cvmfs/pull/3998)
-- [**PR 3**](https://github.com/cvmfs/cvmfs/pull/3996)
-- [**Bisect setup**](https://github.com/ShivamMadlani/CVMFS_kernel_test)
+- [**Virtme-ng integration with CernVM-FS**](https://github.com/cvmfs/cvmfs/pull/3986){:target="_blank"}
+- [**Using custom libFUSE version with CernVM-FS**](https://github.com/cvmfs/cvmfs/pull/3998){:target="_blank"}
+- [**Vendoring libFUSE by utilising CMake build process**](https://github.com/cvmfs/cvmfs/pull/3996){:target="_blank"}
+- [**Git Bisect setup to pinpoint kernel regressions**](https://github.com/ShivamMadlani/CVMFS_kernel_test){:target="_blank"}
 
 This includes improvements to the test framework, integration of custom libfuse versions, and optimizations for kernel compatibility.
 
