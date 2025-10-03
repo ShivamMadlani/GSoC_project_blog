@@ -15,6 +15,7 @@ In this blog post, I’ll walk you through a recent project I worked on, where I
 - [Key Features & Functionality](#key-features--functionality)
 - [Challenges Faced](#challenges-faced)
 - [Lessons Learned](#lessons-learned)
+- [Pull Requests](#pull-requests)
 - [Conclusion](#conclusion)
 
 ---
@@ -78,6 +79,10 @@ Throughout this project, I learned a lot, both from a technical and personal sta
 - **Lesson 3**: [Brief explanation of another lesson, e.g., "Effective time management and breaking down complex tasks."]
 
 These lessons will undoubtedly help me in future projects and improve my approach to development.
+
+---
+
+## Pull Requests
 
 ---
 
