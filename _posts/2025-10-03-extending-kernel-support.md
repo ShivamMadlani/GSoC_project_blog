@@ -1,5 +1,8 @@
 ---
 layout: single
+classes: wide
+sidebar:
+    nav: "navi"
 title: "Extending kernel support with Virtme-ng"
 date: 2025-10-03
 ---
@@ -9,15 +12,6 @@ date: 2025-10-03
 If you’re working in a virtualized environment or with Linux kernels and filesystems, you know how crucial it is to automate and validate tests to ensure things are working smoothly. That’s where **Virtme-ng** comes into play. 
 
 In this blog post, I’ll walk you through a recent project I worked on, where I developed a virtualized testing framework for **CernVM-FS (Cern Virtual Machine File System)**. This post will give you a semi-technical overview of the steps I took, the tools I used, and the challenges I overcame.
-
-### Table of Contents
-- [Project Overview](#project-overview)
-- [Tools & Technologies Used](#tools--technologies-used)
-- [Key Features & Functionality](#key-features--functionality)
-- [Challenges Faced](#challenges-faced)
-- [Lessons Learned](#lessons-learned)
-- [Pull Requests](#pull-requests)
-- [Conclusion](#conclusion)
 
 ---
 

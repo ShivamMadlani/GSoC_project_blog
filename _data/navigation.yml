@@ -1,0 +1,19 @@
+navi:
+  - title: Table Of Contents
+    children:
+      - title: "Introduction"
+        url: /2025/10/03/extending-kernel-support.html#introduction
+      - title: "Project Overview"
+        url: /2025/10/03/extending-kernel-support.html#project-overview
+      - title: "Tools & Technologies Used"
+        url: /2025/10/03/extending-kernel-support.html#tools--technologies-used
+      - title: "Key Features & Functionality"
+        url: /2025/10/03/extending-kernel-support.html#key-features--functionality
+      - title: "Challenges Faced"
+        url: /2025/10/03/extending-kernel-support.html#challenges-faced
+      - title: "Lessons Learned"
+        url: /2025/10/03/extending-kernel-support.html#lessons-learned
+      - title: "Pull Requests"
+        url: /2025/10/03/extending-kernel-support.html#pull-requests
+      - title: "Conclusion"
+        url: /2025/10/03/extending-kernel-support.html#conclusion
