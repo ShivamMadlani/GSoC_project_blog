@@ -1,7 +1,17 @@
-title: Project Overview
+title: Blogs
+name: Shivam
 description: A detailed look at extending kernel support for CVMFS
+
 remote_theme: mmistakes/minimal-mistakes
+atom_feed:
+  hide: true
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/ShivamMadlani"
 paginate: false
+
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
