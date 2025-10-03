@@ -1,11 +1,9 @@
 ---
-layout: post
+layout: single
 title: "Project Overview: Extending kernel support"
 date: 2025-10-03
 categories: [project, technical]
 tags: [jekyll, tutorial, programming, web development]
-author: "[Your Name]"
-permalink: /
 ---
 
 ## Introduction
