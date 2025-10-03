@@ -1,8 +1,7 @@
 ---
 layout: single
-title: "Project Overview: Extending kernel support"
+title: "Extending kernel support with Virtme-ng"
 date: 2025-10-03
-categories: [project, technical]
 tags: [jekyll, tutorial, programming, web development]
 ---
 
